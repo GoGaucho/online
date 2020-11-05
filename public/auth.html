@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>Gaucho Online</title>
+    <!-- dependency -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert@2.1.2/dist/sweetalert.min.js"></script>
+  </head>
+  <body style="margin: 0;">
+    <noscript>
+      <strong>We're sorry but GoGaucho Online doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div style="width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <h1>Loading ...</h1>
+    </div>
+    <!-- script -->
+    <script type="text/javascript">
+      function getCode() {
+        const url = window.location.href;
+        let regex = new RegExp('[?&]code(=([^&#]*)|&|#|$)');
+        let res = regex.exec(url);
+        if (!res || !res[2]) return false;
+        return decodeURIComponent(res[2]);
+      }
+      function fail() {
+        swal("Error", "Login failed. You may try again", "error")
+          .then(() => {window.location.href = "/";});
+        return false;
+      }
+      function go() {
+        const code = getCode();
+        if (!code) {
+          fail();
+          return;
+        }
+        fetch('/api/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ code: code })
+        })
+          .then(resp => (resp.ok ? resp.text() : fail()))
+          .then(resp => {
+            if (resp) {
+              window.localStorage['token'] = resp;
+              const callback = window.sessionStorage.callback;
+              if (callback) {
+                window.sessionStorage.removeItem('callback');
+                window.location.href = callback;
+              } else window.location.href = '/';
+            }
+          });
+      }
+      go();
+    </script>
+  </body>
+</html>
