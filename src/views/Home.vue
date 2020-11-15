@@ -18,7 +18,9 @@
       >
         <v-icon left>mdi-food</v-icon>Dining
       </v-btn>
-      <v-btn color="primary" style="margin: 10px;" large      >
+      <v-btn color="primary" style="margin: 10px;" large
+        @click="$router.push('/library')"
+      >
         <v-icon left>mdi-library</v-icon>Library
       </v-btn>
     </div>

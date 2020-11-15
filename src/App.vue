@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <Bar @open="userMenu = true" />
-    <v-content>
+    <v-main>
       <transition name="fade" mode="out-in">
         <router-view />
       </transition>
-    </v-content>
+    </v-main>
     <v-navigation-drawer
       app
       right

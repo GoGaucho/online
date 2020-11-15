@@ -161,8 +161,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'Commons',
   data () {
@@ -211,8 +209,7 @@ export default {
     },
     getData () {
       var _this = this
-      // get hours
-      axios
+      this.$ajax // get hours
         .get('/api/dining/hours')
         .then(resp => {
           for (var p in resp.data) {
@@ -234,7 +231,7 @@ export default {
       // get menus
       for (var s in _this.commons) {
         if (_this.commons[s].open >= 1) {
-          axios
+          this.$ajax
             .get('/api/dining/menus/' + _this.commons[s].title.toLowerCase())
             .then(resp => {
               _this.commons[s].menus = resp.data
