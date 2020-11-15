@@ -10,7 +10,7 @@ function addQuarterName (q:string) {
 }
 
 export async function getQuarters () {
-  return ['20204', '20203', '20202', '20201'].map(e => addQuarterName(e))
+  return ['20211', '20204', '20203', '20202', '20201'].map(e => addQuarterName(e))
 }
 
 export function getDept () {

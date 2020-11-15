@@ -17,5 +17,6 @@ export default {
 <style scoped>
   div.dining {
     width: 100vw;
+    background: #E3F2FD;
   }
 </style>

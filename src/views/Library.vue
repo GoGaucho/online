@@ -54,5 +54,6 @@ export default {
   div.library {
     width: 100vw;
     padding: 2%;
+    background: #E3F2FD;
   }
 </style>
